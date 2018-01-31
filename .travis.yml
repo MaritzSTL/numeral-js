@@ -1,17 +1,14 @@
 language: node_js
-sudo: required
+sudo: false
 dist: trusty
 node_js: stable
 addons:
   firefox: latest
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
-before_script:
-  - npm install -g bower polylint web-component-tester
+  chrome: stable
+install:
+  - npm i -g bower polymer-cli web-component-tester
   - bower install
-  - polylint
+before_script:
+  - polymer lint
 script:
-  - xvfb-run wct --skip-plugin sauce
+  - polymer test
